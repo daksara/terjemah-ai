@@ -63,22 +63,17 @@ export default function TranslatorApp() {
 
   async function translate() {
     if (!inputText.trim()) return;
-    if (!apiKey.trim()) {
-      setError("Masukkan Groq API Key dulu di pengaturan ⚙️");
-      setShowApiInput(true);
-      return;
-    }
+    
     setLoading(true);
     setError("");
     setResult(null);
 
     try {
       const response = await fetch("https://terjemah-proxy.daksara-dev.workers.dev", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${apiKey.trim()}`,
-        },
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
         body: JSON.stringify({
           model: "llama-3.3-70b-versatile",
           max_tokens: 1000,
